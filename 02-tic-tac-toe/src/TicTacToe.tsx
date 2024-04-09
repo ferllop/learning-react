@@ -1,6 +1,6 @@
 import Board from "./components/Board"
 
-const App = () => {
+const TicTacToe = () => {
   return (
     <>
       <Board />
@@ -10,4 +10,4 @@ const App = () => {
 
 
 
-export default App
+export default TicTacToe
