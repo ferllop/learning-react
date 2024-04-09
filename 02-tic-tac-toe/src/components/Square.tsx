@@ -8,10 +8,11 @@ export type SquareType = {
 type Props = {
   status: SquareType['status']
   id: SquareType['id']
+  handleClick: (id: SquareType['id']) => () => void
 }
 
-const Square = ({status, id}: Props) => {
-  return <div className="square" onClick={() => console.log(status, id)}>{status}</div>
+const Square = ({status, id, handleClick}: Props) => {
+  return <div className="square" onClick={handleClick(id)}>{status}</div>
 }
 
 export default Square

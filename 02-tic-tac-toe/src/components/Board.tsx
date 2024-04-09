@@ -1,22 +1,38 @@
 import { useState } from "react"
 import Square, { type SquareType } from "./Square"
+import { Player } from "../TicTacToe"
 
-export type Player = 'x' | 'o'
+type Squares = SquareType[]
+const createSquare = (id: number, status: Turn | null): SquareType => ({status, id})
+const emptySquares: Squares = (Array(9).fill(null).map((_, index) => createSquare(index, null)))
 
-type Squares = [
-  SquareType, SquareType, SquareType,
-  SquareType, SquareType, SquareType,
-  SquareType, SquareType, SquareType,
-]
-const createEmptySquare = (id: number): SquareType => ({status: null, id})
-const emptySquares = Array(9).fill(null).map((_, index) => createEmptySquare(index)) as Squares
+type Props = {
+  player1: Player
+  player2: Player
+}
 
-const Board = () => {
-  const [squares] = useState(emptySquares)
+type Turn = Props['player1'] | Props['player2']
+
+
+const Board = ({player1, player2}: Props) => {
+  const [squares, setSquares] = useState<Squares>(emptySquares)
+  const [turn, setTurn] = useState<Turn>(player1)
+
+  const handleClick = (id: SquareType['id']) => () => {
+    setTurn(turn === player1 ? player2 : player1)
+    if (!squares[id].status) {
+      setSquares(squares.map(square => square.id === id ? {...square, status: turn} : square))
+    }
+  }
 
   return (
     <div className="board">
-      {squares.map(square => <Square key={square.id} id={square.id} status={square.status} />)}
+      {squares.map(square => 
+        <Square
+          key={square.id}
+          handleClick={handleClick}
+          id={square.id}
+          status={square.status} />)}
     </div>
   )
 }

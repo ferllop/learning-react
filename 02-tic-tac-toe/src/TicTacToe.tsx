@@ -1,9 +1,11 @@
 import Board from "./components/Board"
 
+export type Player = 'x' | 'o'
+
 const TicTacToe = () => {
   return (
     <>
-      <Board />
+      <Board player1="X" player2="O"/>
     </>
   )
 }
