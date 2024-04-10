@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { Player, Turn } from "../TicTacToe"
-import { type Board, emptyBoard, isGameFinished } from "../models/Board"
+import { type Board, emptyBoard, isGameFinished, squareIsEmpty, updateBoard } from "../models/Board"
 import { SquareId } from "../models/Square"
 import Square from "./Square"
 
@@ -15,8 +15,8 @@ const Board = ({player1, player2, onFinishedGame}: Props) => {
   const [turn, setTurn] = useState<Turn>(player1)
 
   const handleClick = (id: SquareId) => () => {
-    if (!isGameFinished(board) && !board.find(s => s.id === id)?.status) {
-      const newBoard = board.map(square => square.id === id ? {...square, status: turn} : square)
+    if (!isGameFinished(board) && squareIsEmpty(board, id)) {
+      const newBoard = updateBoard(board, id, turn)
       setBoard(newBoard)
       if (isGameFinished(newBoard)) {
         onFinishedGame(turn)

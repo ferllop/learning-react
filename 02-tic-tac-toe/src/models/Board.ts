@@ -1,3 +1,4 @@
+import { Player } from "../TicTacToe"
 import { SquareId, createSquare, isEmpty } from "./Square"
 
 const s = (id: SquareId) => createSquare(id, null)
@@ -7,6 +8,12 @@ export const emptyBoard = [
   s(7), s(8), s(9),
 ]
 export type Board = typeof emptyBoard
+
+export const squareIsEmpty = (board: Board, squareId: SquareId) => 
+  !board.find(s => s.id === squareId)?.status
+
+export const updateBoard = (board: Board, id: SquareId, status: Player) => 
+  board.map(square => square.id === id ? {...square, status} : square)
 
 export const isGameFinished = (board: Board) => {
   const same = (board: Board) => (...is: number[]): boolean => {
