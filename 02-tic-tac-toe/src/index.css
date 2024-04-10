@@ -26,3 +26,11 @@ body {
   min-height: 3em;
   min-width: 3em;
 }
+
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0px;
+  border: 1px solid black;
+}
