@@ -27,9 +27,10 @@ const Board = ({player1, player2}: Props) => {
       {squares.map(square => 
         <Square
           key={square.id}
-          handleClick={handleClick}
           id={square.id}
-          status={square.status} />)}
+          status={square.status} 
+          handleClick={handleClick}
+          />)}
     </div>
   )
 }

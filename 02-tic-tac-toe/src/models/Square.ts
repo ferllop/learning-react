@@ -8,4 +8,5 @@ export type Square = {
 }
 
 export const createSquare = (id: number, status: SquareStatus): Square => ({status, id})
+export const isEmpty = (s: Square) => s.status === null
 

@@ -1,4 +1,4 @@
-import { SquareId, createSquare } from "./Square"
+import { SquareId, createSquare, isEmpty } from "./Square"
 
 const s = (id: SquareId) => createSquare(id, null)
 export const emptyBoard = [
@@ -10,9 +10,9 @@ export type Board = typeof emptyBoard
 
 export const isGameFinished = (board: Board) => {
   const same = (board: Board) => (...is: number[]): boolean => {
-    const squaresStatus = is.map(i => board[i].status)
-    const noneIsEmpty = !squaresStatus.some(status => status === null)
-    const areAllEqual = new Set(squaresStatus).size === 1
+    const squares = is.map(i => board[i])
+    const noneIsEmpty = !squares.some(square => isEmpty(square))
+    const areAllEqual = new Set(squares.map(sq => sq.status)).size === 1
     return noneIsEmpty && areAllEqual
   }
   
