@@ -21,10 +21,12 @@ body {
 }
 
 .square {
-  display: inline-block;
+  display: flex;
   border: 1px solid black;
   min-height: 3em;
   min-width: 3em;
+  justify-content: center;
+  align-items: center;
 }
 
 
