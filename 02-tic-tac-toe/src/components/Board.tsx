@@ -20,8 +20,8 @@ const Board = ({player1, player2}: Props) => {
   const [turn, setTurn] = useState<Turn>(player1)
 
   const handleClick = (id: SquareId) => () => {
-    setTurn(turn === player1 ? player2 : player1)
     if (!squares[id-1].status) {
+      setTurn(turn === player1 ? player2 : player1)
       setSquares(squares.map(square => square.id === id ? {...square, status: turn} : square))
     }
   }
