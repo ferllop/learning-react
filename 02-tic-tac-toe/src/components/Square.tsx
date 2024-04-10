@@ -3,12 +3,12 @@ import { SquareId, SquareStatus } from "../models/Square"
 type Props = {
   status: SquareStatus
   id: SquareId
-  handleClick: (id: SquareId) => () => void
+  onSquareClick: (id: SquareId) => () => void
 }
 
-const Square = ({status, id, handleClick}: Props) => {
+const Square = ({status, id, onSquareClick}: Props) => {
   return (
-    <div className="square" onClick={handleClick(id)}>
+    <div className="square" onClick={onSquareClick(id)}>
       {status}
     </div>
   )

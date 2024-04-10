@@ -33,7 +33,7 @@ const Board = ({player1, player2, onFinishedGame}: Props) => {
           key={square.id}
           id={square.id}
           status={square.status} 
-          handleClick={handleClick}
+          onSquareClick={handleClick}
           />)}
     </div>
   )
