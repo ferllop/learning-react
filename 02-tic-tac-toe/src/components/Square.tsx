@@ -9,7 +9,7 @@ type Props = {
 const Square = ({status, id, handleClick}: Props) => {
   return (
     <div className="square" onClick={handleClick(id)}>
-      <span>{status}</span>
+      {status}
     </div>
   )
 }

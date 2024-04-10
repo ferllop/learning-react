@@ -6,14 +6,12 @@ export type Turn = Player
 
 const TicTacToe = () => {
   const [winner, setWinner] = useState<Player | null>(null)
-  const handleFinishedGame = (winner: Player) => {
-    setWinner(winner)
-  }
+  const handleFinishedGame = (winner: Player) => setWinner(winner)
 
   return (
     <>
       <Board player1="X" player2="O" onFinishedGame={handleFinishedGame}/>
-      {winner && <span className="winner">Player {winner} wins!!</span>}
+      {winner && <aside className="winner">Player {winner} wins!!</aside>}
     </>
   )
 }
