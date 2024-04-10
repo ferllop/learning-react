@@ -1,14 +1,7 @@
 import { useState } from "react"
-import Square, { SquareId, createSquare } from "./Square"
+import Square, { SquareId } from "./Square"
 import { Player, Turn } from "../TicTacToe"
-
-type Board = typeof emptyBoard
-const s = (id: SquareId) => createSquare(id, null)
-const emptyBoard = [
-  s(1), s(2), s(3),
-  s(4), s(5), s(6),
-  s(7), s(8), s(9),
-]
+import { type Board, emptyBoard, isGameFinished } from "./BoardModel"
 
 type Props = {
   player1: Player
@@ -20,9 +13,11 @@ const Board = ({player1, player2}: Props) => {
   const [turn, setTurn] = useState<Turn>(player1)
 
   const handleClick = (id: SquareId) => () => {
-    if (!squares.find(s => s.id === id)?.status) {
-      setTurn(turn === player1 ? player2 : player1)
-      setSquares(squares.map(square => square.id === id ? {...square, status: turn} : square))
+    if (!isGameFinished(squares)) {
+      if (!squares.find(s => s.id === id)?.status) {
+        setSquares(squares.map(square => square.id === id ? {...square, status: turn} : square))
+        setTurn(turn === player1 ? player2 : player1)
+      }
     }
   }
 
