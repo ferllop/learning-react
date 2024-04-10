@@ -1,6 +1,7 @@
 import Board from "./components/Board"
 
-export type Player = 'x' | 'o'
+export type Player = 'X' | 'O'
+export type Turn = Player
 
 const TicTacToe = () => {
   return (

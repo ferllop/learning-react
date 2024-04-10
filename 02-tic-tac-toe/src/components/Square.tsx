@@ -1,14 +1,18 @@
-import { Player } from "../App"
+import { Player } from "../TicTacToe"
 
-export type SquareType = {
-  status: Player | null,
+export type SquareId = number
+export type SquareStatus = Player | null
+export type Square = {
   id: number
+  status: SquareStatus
 }
 
+export const createSquare = (id: number, status: SquareStatus): Square => ({status, id})
+
 type Props = {
-  status: SquareType['status']
-  id: SquareType['id']
-  handleClick: (id: SquareType['id']) => () => void
+  status: Square['status']
+  id: Square['id']
+  handleClick: (id: Square['id']) => () => void
 }
 
 const Square = ({status, id, handleClick}: Props) => {
