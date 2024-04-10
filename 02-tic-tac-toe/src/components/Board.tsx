@@ -7,16 +7,20 @@ import Square from "./Square"
 type Props = {
   player1: Player
   player2: Player
+  onFinishedGame: (winner: Player) => void
 }
 
-const Board = ({player1, player2}: Props) => {
+const Board = ({player1, player2, onFinishedGame}: Props) => {
   const [squares, setSquares] = useState<Board>(emptyBoard)
   const [turn, setTurn] = useState<Turn>(player1)
 
   const handleClick = (id: SquareId) => () => {
-    if (!isGameFinished(squares)) {
-      if (!squares.find(s => s.id === id)?.status) {
-        setSquares(squares.map(square => square.id === id ? {...square, status: turn} : square))
+    if (!isGameFinished(squares) && !squares.find(s => s.id === id)?.status) {
+      const newBoard = squares.map(square => square.id === id ? {...square, status: turn} : square)
+      setSquares(newBoard)
+      if (isGameFinished(newBoard)) {
+        onFinishedGame(turn)
+      } else {
         setTurn(turn === player1 ? player2 : player1)
       }
     }
