@@ -11,13 +11,13 @@ type Props = {
 }
 
 const Board = ({player1, player2, onFinishedGame}: Props) => {
-  const [squares, setSquares] = useState<Board>(emptyBoard)
+  const [board, setBoard] = useState<Board>(emptyBoard)
   const [turn, setTurn] = useState<Turn>(player1)
 
   const handleClick = (id: SquareId) => () => {
-    if (!isGameFinished(squares) && !squares.find(s => s.id === id)?.status) {
-      const newBoard = squares.map(square => square.id === id ? {...square, status: turn} : square)
-      setSquares(newBoard)
+    if (!isGameFinished(board) && !board.find(s => s.id === id)?.status) {
+      const newBoard = board.map(square => square.id === id ? {...square, status: turn} : square)
+      setBoard(newBoard)
       if (isGameFinished(newBoard)) {
         onFinishedGame(turn)
       } else {
@@ -28,7 +28,7 @@ const Board = ({player1, player2, onFinishedGame}: Props) => {
 
   return (
     <div className="board">
-      {squares.map(square => 
+      {board.map(square => 
         <Square
           key={square.id}
           id={square.id}
