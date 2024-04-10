@@ -1,15 +1,15 @@
-import { SquareId, SquareStatus } from "../models/Square"
+import { Id, Player } from "../models/Square"
 
 type Props = {
-  status: SquareStatus
-  id: SquareId
-  onSquareClick: (id: SquareId) => () => void
+  id: Id
+  player: Player
+  onSquareClick: (id: Id) => () => void
 }
 
-const Square = ({status, id, onSquareClick}: Props) => {
+const Square = ({player, id, onSquareClick}: Props) => {
   return (
     <div className="square" onClick={onSquareClick(id)}>
-      {status}
+      {player}
     </div>
   )
 }

@@ -1,12 +1,10 @@
-import { Player } from "../TicTacToe"
-
-export type SquareId = number
-export type SquareStatus = Player | null
+export type Id = number
+export type Player = string | null
 export type Square = {
-  id: number
-  status: SquareStatus
+  id: Id
+  player: Player
 }
 
-export const createSquare = (id: number, status: SquareStatus): Square => ({status, id})
-export const isEmpty = (s: Square) => s.status === null
+export const create = (id: number, player: Player): Square => ({player, id})
+export const isEmpty = (s: Square) => s.player === null
 
