@@ -1,7 +1,8 @@
 import { useState } from "react"
-import Square, { SquareId } from "./Square"
 import { Player, Turn } from "../TicTacToe"
-import { type Board, emptyBoard, isGameFinished } from "./BoardModel"
+import { type Board, emptyBoard, isGameFinished } from "../models/Board"
+import { SquareId } from "../models/Square"
+import Square from "./Square"
 
 type Props = {
   player1: Player
@@ -32,7 +33,5 @@ const Board = ({player1, player2}: Props) => {
     </div>
   )
 }
-
-
 
 export default Board
