@@ -25,6 +25,7 @@ aside {
 }
 
 .board {
+  position: relative;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   max-width: calc(3 * var(--square-size));

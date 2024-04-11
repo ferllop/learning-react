@@ -1,3 +1,48 @@
 .winnerMarker {
-  border: 1px solid black
+  --sixth-of-board: 16.66666667%;
+  --marker-height: calc(var(--square-size) / 1.6);
+  position: absolute;
+  border: 1px solid black;
+  border-radius: var(--marker-height);
+  width: calc(3 * var(--square-size) - var(--square-size) / 4);
+  height: var(--marker-height);
+  transform-origin: center;
+}
+
+.winnerMarker[class*="row"] {
+  left: 50%;
+  transform: translate(-50%);
+  --middle: calc(var(--sixth-of-board)*3 - var(--marker-height)/2);
+}
+.winnerMarker.row-1 {
+  top: calc(var(--middle) - var(--sixth-of-board) * 2);
+}
+.winnerMarker.row-2 {
+  top: var(--middle);
+}
+.winnerMarker.row-3 {
+  top: calc(var(--middle) + var(--sixth-of-board) * 2);
+}
+
+.winnerMarker[class*="column"],
+.winnerMarker[class*="diagonal"] {
+  left: 50%;
+  top: calc(var(--sixth-of-board)*3 - var(--marker-height)/2);
+  transform: translateX(-50%) rotate(90deg);
+}
+.winnerMarker.column-1 {
+  left: var(--sixth-of-board);
+}
+.winnerMarker.column-3 {
+  left: calc(var(--sixth-of-board) * 5);
+}
+
+.winnerMarker[class*="diagonal"] {
+  width: calc(var(--square-size) * 4 - var(--square-size) / 4);
+}
+.winnerMarker.diagonal-1 {
+  transform: translateX(-50%) rotate(45deg);
+}
+.winnerMarker.diagonal-2 {
+  transform: translateX(-50%) rotate(-45deg);
 }

@@ -6,7 +6,8 @@ type Props = {
 }
 
 const WinnerMoveMarker = ({winnerBoard}: Props) => {
-  return <div className="winnerMarker">Winner move {getWinnerMoveName(winnerBoard)}</div>
+  return <div className={'winnerMarker ' + getWinnerMoveName(winnerBoard)}></div>
+
 }
 
 export default WinnerMoveMarker

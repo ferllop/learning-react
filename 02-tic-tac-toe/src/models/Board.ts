@@ -47,14 +47,14 @@ export const getWinnerCoords = (board: Board) => {
 
 export const getWinnerMoveName = (winnerBoard: Board) => {
   const names: Record<string, string> = {
-    '012': 'row1',
-    '345': 'row2',
-    '678': 'row3',
-    '036': 'column1',
-    '147': 'column2',
-    '258': 'column3',
-    '048': 'forwardDiagonal',
-    '246': 'backdiagonal',
+    '012': 'row-1',
+    '345': 'row-2',
+    '678': 'row-3',
+    '036': 'column-1',
+    '147': 'column-2',
+    '258': 'column-3',
+    '048': 'diagonal-1',
+    '246': 'diagonal-2',
   }
   const winnerCoords = getWinnerCoords(winnerBoard)
   return winnerCoords !== null ? names[winnerCoords.join('')] : 'nowinner'

@@ -34,8 +34,8 @@ const Board = ({actualPlayer, onWinner, onTurnChange}: Props) => {
           player={square.player} 
           onSquareClick={handleSquareClick(actualPlayer)}
           />)}
+        {hasWinner(board) && <WinnerMoveMarker winnerBoard={board}/>}
     </div>
-    {hasWinner(board) && <WinnerMoveMarker winnerBoard={board}/>}
   </>
 }
 
