@@ -7,11 +7,27 @@
   width: calc(3 * var(--square-size) - var(--square-size) / 4);
   height: var(--marker-height);
   transform-origin: center;
+  animation-duration: .5s;
+  animation-name: bounce;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-delay: 0s;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes bounce {
+  from {
+    scale: 96%;
+  }
+
+  to {
+    scale: 102%;
+  }
 }
 
 .winnerMarker[class*="row"] {
   left: 50%;
-  transform: translate(-50%);
+  translate: -50% 0;
   --middle: calc(var(--sixth-of-board)*3 - var(--marker-height)/2);
 }
 .winnerMarker.row-1 {
@@ -28,7 +44,8 @@
 .winnerMarker[class*="diagonal"] {
   left: 50%;
   top: calc(var(--sixth-of-board)*3 - var(--marker-height)/2);
-  transform: translateX(-50%) rotate(90deg);
+  translate: -50% 0;
+  rotate: 90deg;
 }
 .winnerMarker.column-1 {
   left: var(--sixth-of-board);
@@ -41,8 +58,9 @@
   width: calc(var(--square-size) * 4 - var(--square-size) / 4);
 }
 .winnerMarker.diagonal-1 {
-  transform: translateX(-50%) rotate(45deg);
+  rotate: 45deg;
 }
 .winnerMarker.diagonal-2 {
-  transform: translateX(-50%) rotate(-45deg);
+  rotate: -45deg;
 }
+
