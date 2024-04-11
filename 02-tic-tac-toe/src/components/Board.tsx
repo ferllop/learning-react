@@ -1,13 +1,30 @@
-import { Board as BoardType } from "../models/Board"
-import { Id as SquareId} from "../models/Square"
+import { useState } from "react"
+import { Board as BoardType, canPlayInSquare, emptyBoard, hasWinner, updateBoard } from "../models/Board"
+import { Id as SquareId, Player} from "../models/Square"
 import Square from "./Square"
+import WinnerPlayMarker from "./WinnerMoveMarker"
 
 type Props = {
-  board: BoardType
-  handleSquareClick: (id: SquareId) => () => void
+  actualPlayer: Player
+  onWinner: () => void
+  onTurnChange: () => void
 }
 
-const Board = ({handleSquareClick, board}: Props) => {
+const Board = ({actualPlayer, onWinner, onTurnChange}: Props) => {
+  const [board, setBoard] = useState<BoardType>(emptyBoard)
+
+  const handleSquareClick = (player: Player) => (id: SquareId) => () => {
+    if (canPlayInSquare(board, id)) {
+      const newBoard = updateBoard(board, id, player)
+      setBoard(newBoard)
+      if (hasWinner(newBoard)) {
+        onWinner()
+      } else {
+        onTurnChange()
+      }
+    }
+  }
+
   return (
     <div className="board">
       {board.map(square => 
@@ -15,7 +32,7 @@ const Board = ({handleSquareClick, board}: Props) => {
           key={square.id}
           id={square.id}
           player={square.player} 
-          onSquareClick={handleSquareClick}
+          onSquareClick={handleSquareClick(actualPlayer)}
           />)}
     </div>
   )
