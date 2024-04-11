@@ -17,15 +17,47 @@ export const updateBoard = (board: Board, id: Square.Id, player: Square.Player):
   board.map(square => square.id === id ? {...square, player} : square)
 
 export const hasWinner = (board: Board) => {
+  return getWinnerCoords(board) !== null
+}
+
+type Predicate<T> = (...x: T[]) => boolean
+const winnerRows = [[0,1,2], [3,4,5], [6,7,8]]
+const winnerColumns = [[0,3,6], [1,4,7], [2,5,8]]
+const winnerDiagonal = [[0,4,8], [2,4,6]]
+export const getWinnerCoords = (board: Board) => {
+  const getWinnerMove = 
+    <T>(predicate: Predicate<T>) => 
+    (winnerPlays: T[][]) => 
+    winnerPlays.reduce<T[]|null>((accum, squares) => predicate(...squares) ? squares : accum, null)
+
   const squaresHaveSamePlayer = (board: Board) => (...arrayIndexes: number[]): boolean => {
+    if (arrayIndexes.some(i => i-1 > board.length)) {
+      throw new Error('Indexes must be into board\'s bounds')
+    }
     const squares = arrayIndexes.map(i => board[i])
     const noneIsEmpty = !squares.some(player => Square.isEmpty(player))
     const areAllEqual = new Set(squares.map(sq => sq.player)).size === 1
     return noneIsEmpty && areAllEqual
   }
-  const b = squaresHaveSamePlayer(board)
-  const isSomeRowCompleted = b(0, 1, 2) || b(3,4,5) || b(6,7,8)
-  const isSomeColumnCompleted = b(0,3,6) || b(1,4,7) || b(2,5,8)
-  const isSomeDiagonalCompleted = b(0,4,8) || b(2,4,6)
-  return isSomeRowCompleted || isSomeColumnCompleted || isSomeDiagonalCompleted
+
+  return getWinnerMove(squaresHaveSamePlayer(board))([
+    ...winnerRows,...winnerColumns, ...winnerDiagonal
+  ])
 }
+
+export const getWinnerMoveName = (winnerBoard: Board) => {
+  const names: Record<string, string> = {
+    '012': 'row1',
+    '345': 'row2',
+    '678': 'row3',
+    '036': 'column1',
+    '147': 'column2',
+    '258': 'column3',
+    '048': 'forwardDiagonal',
+    '246': 'backdiagonal',
+  }
+  const winnerCoords = getWinnerCoords(winnerBoard)
+  return winnerCoords !== null ? names[winnerCoords.join('')] : 'nowinner'
+}
+
+

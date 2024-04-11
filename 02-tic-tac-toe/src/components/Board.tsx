@@ -2,7 +2,7 @@ import { useState } from "react"
 import { Board as BoardType, canPlayInSquare, emptyBoard, hasWinner, updateBoard } from "../models/Board"
 import { Id as SquareId, Player} from "../models/Square"
 import Square from "./Square"
-import WinnerPlayMarker from "./WinnerMoveMarker"
+import WinnerMoveMarker from "./WinnerMoveMarker"
 
 type Props = {
   actualPlayer: Player
@@ -25,7 +25,7 @@ const Board = ({actualPlayer, onWinner, onTurnChange}: Props) => {
     }
   }
 
-  return (
+  return <>
     <div className="board">
       {board.map(square => 
         <Square
@@ -35,7 +35,8 @@ const Board = ({actualPlayer, onWinner, onTurnChange}: Props) => {
           onSquareClick={handleSquareClick(actualPlayer)}
           />)}
     </div>
-  )
+    {hasWinner(board) && <WinnerMoveMarker winnerBoard={board}/>}
+  </>
 }
 
 export default Board
