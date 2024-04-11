@@ -12,12 +12,19 @@ const TicTacToe = () => {
   const handleTurnChange = () => setActualPlaying(actualPlayer === player1 ? player2 : player1)
   const handleWinner = () => setWinner(actualPlayer)
 
-  return (
-    <>
-    <Board actualPlayer={actualPlayer} onWinner={handleWinner} onTurnChange={handleTurnChange}/>
-      {winner && <aside className="winner">Player {winner} wins!!</aside>}
-    </>
-  )
+  return (<>
+    <Board 
+      actualPlayer={actualPlayer} 
+      onWinner={handleWinner} 
+      onTurnChange={handleTurnChange}
+    />
+
+    <aside>{
+      winner 
+        ? `Player ${winner} wins!!` 
+        : `Is the turn of player ${actualPlayer}`}
+    </aside>
+  </>)
 }
 
 export default TicTacToe

@@ -20,9 +20,15 @@ body {
   margin: 0;
 }
 
+aside {
+  text-align: center;
+}
+
 .board {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  max-width: calc(3 * var(--square-size));
+  margin: 0 auto;
   border: calc(var(--line-size) / 2) solid black;
 }
 
@@ -33,8 +39,4 @@ body {
   min-height: var(--square-size);
   min-width: var(--square-size);
   border: calc(var(--line-size) / 2) solid black;
-}
-
-.winner {
-  position: absolute;
 }
