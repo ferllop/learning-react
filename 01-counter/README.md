@@ -1,8 +1,13 @@
-# React + Vite
+# Counter
+First project done without watching any tutorial. All done just by myself.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## To start the project on local
+Clone this repository and run one by one the following commands:
+```
+cd 01-counter
+npm install
+npm run dev
+```
 
-Currently, two official plugins are available:
+That last command will tell you the url to put into your browser.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
